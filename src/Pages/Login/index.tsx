@@ -29,9 +29,7 @@ const Login = () => {
     password: yup.string(),
   });
 
-  function toastify() {
-    console.log(toast);
-  }
+
 
   const {
     register,
