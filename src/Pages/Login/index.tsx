@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { ButtonPage } from "../../Components/Button";
 import { InputPage } from "../../Components/Input";
-import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ContainerStyled, FormStyled, SummaryStyled } from "./styles";
 
 const Login = () => {
