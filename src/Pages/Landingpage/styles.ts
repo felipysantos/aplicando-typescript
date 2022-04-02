@@ -27,7 +27,7 @@ export const ButtonContainerStyled = styled.div`
 `;
 
 export const SummaryStyled = styled(motion.h1)`
-  font-size: 48px;
+  font-size: 40px;
   letter-spacing: 1px;
   margin: 0;
   font-weight: 600;
@@ -39,5 +39,6 @@ export const PStyled = styled(motion.p)`
   font-family: "Montserrat";
   font-weight: 500;
   font-size: 22px;
+  text-align: center;
   color: ${(props) => props.color};
 `;
