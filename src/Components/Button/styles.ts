@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { ButtonProps } from "../../Interfaces/ButtonProps";
-export const ButtonStyled = styled.button<ButtonProps>`
+import { motion } from "framer-motion";
+export const ButtonStyled = styled(motion.button)<ButtonProps>`
   width: auto;
   height: auto;
   border: none;

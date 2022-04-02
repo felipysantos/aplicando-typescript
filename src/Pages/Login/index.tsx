@@ -8,7 +8,7 @@ import * as yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
-import { ContainerStyled, FormStyled, SummaryStyled } from "./styles";
+import { ContainerStyled, FormStyled, PStyled, SummaryStyled } from "./styles";
 
 const Login = () => {
   const schema = yup.object().shape({
@@ -16,7 +16,7 @@ const Login = () => {
       .string()
       .email()
       .required(() =>
-        toast.dark("Campo obrigatório!", {
+        toast.error("Email obrigatório!", {
           position: "top-center",
           autoClose: 5000,
           hideProgressBar: false,
@@ -26,10 +26,18 @@ const Login = () => {
           progress: undefined,
         })
       ),
-    password: yup.string(),
+    password: yup.string().required(() =>
+      toast.error("Senha obrigatório!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+    ),
   });
-
-
 
   const {
     register,
@@ -39,7 +47,15 @@ const Login = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmitHandle = (data: any) => {
-    console.log(data);
+    toast.success("Logado com sucesso", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
 
     reset();
   };
@@ -50,15 +66,38 @@ const Login = () => {
       <ToastContainer />
 
       {/* FORMULÁRIO */}
-      <FormStyled onSubmit={handleSubmit(onSubmitHandle)}>
-        <SummaryStyled>Login</SummaryStyled>
+      <FormStyled
+        onSubmit={handleSubmit(onSubmitHandle)}
+        initial={{ x: "300px", opacity: 0 }}
+        animate={{ x: 0, opacity: 1, scale: 1 }}
+        transition={{ duration: 0.3 }}
+      >
+        <SummaryStyled
+          initial={{ x: "50px", opacity: 0 }}
+          animate={{ x: 0, opacity: 1, scale: 1 }}
+          transition={{
+            delay: 0.3,
+          }}
+        >
+          Login
+        </SummaryStyled>
         {/* INPUT EMAIL */}
-        <InputPage type={"text"} placeholder={"E-mail"}>
+        <InputPage
+          id="1"
+          background={errors.email ? "red" : "#b7b3f1"}
+          type={"text"}
+          placeholder={"E-mail"}
+        >
           {{ ...register("email") }}
         </InputPage>
 
         {/* INPUT PASSWORD */}
-        <InputPage type={"password"} placeholder={"Senha"}>
+        <InputPage
+          id="2"
+          background={errors.password ? "red" : "#b7b3f1"}
+          type={"password"}
+          placeholder={"Senha"}
+        >
           {{ ...register("password") }}
         </InputPage>
 
@@ -67,9 +106,23 @@ const Login = () => {
           Submit
         </ButtonPage>
         {/* REDIRECIONAMENTO PARA TELA DE CADASTRO */}
-        <p>
-          Não tem conta ainda? <Link to={"/signup"}>Cadastre-se</Link>
-        </p>
+        <PStyled
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.8 }}
+        >
+          Não tem conta ainda?{" "}
+          <Link
+            to={"/signup"}
+            style={{
+              textDecoration: "none",
+              color: "#817be7",
+              fontWeight: "900",
+            }}
+          >
+            Cadastre-se
+          </Link>
+        </PStyled>
       </FormStyled>
     </ContainerStyled>
   );
