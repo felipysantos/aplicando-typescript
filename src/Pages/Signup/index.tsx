@@ -7,11 +7,10 @@ import * as yup from "yup";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ContainerStyled, FormStyled, PStyled, SummaryStyled } from "./styles";
 
 const Signup = () => {
-  const history = useHistory();
   const schema = yup.object().shape({
     name: yup.string().required(() =>
       toast.error("Nome obrigatório!", {
